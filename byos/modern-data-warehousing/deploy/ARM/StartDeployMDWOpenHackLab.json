@@ -1,0 +1,137 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "SqlAdminLogin": {
+            "type": "string",
+            "defaultValue": "southridge"
+        },
+        "SqlAdminLoginPassword": {
+            "type": "securestring",
+            "minLength": 8,
+            "defaultValue": "md@ohPwd001!"
+        },
+        "VMAdminUsername": {
+            "type": "string",
+            "defaultValue": "southridge"
+        },
+        "VMAdminPassword": {
+            "type": "securestring",
+            "minLength": 8,
+            "defaultValue": "md@ohPwd001!"
+        },
+        "RentalsBackupStorageAccountName": {
+            "type": "string",
+            "defaultValue": "openhackartifacts"
+        },
+        "RentalsBackupStorageContainerName": {
+            "type": "string",
+            "defaultValue": "mdw"
+        },
+        "RentalsBackupFileName": {
+            "type": "string",
+            "defaultValue": "onpremrentals.bak"
+        },
+        "RentalsDatabaseName": {
+            "type": "string",
+            "defaultValue": "OnPremRentals"
+        },
+        "RentalsCsvFolderName": {
+            "type": "string",
+            "defaultValue": "onpremrentalscsv"
+        },
+        "CatalogJsonFileName": {
+            "type": "string",
+            "defaultValue": "movies_southridge.json"
+        },
+        "SalesDacPacPath": {
+            "type": "string",
+            "defaultValue": "https://openhackartifacts.blob.core.windows.net/mdw/CloudSales.bacpac"
+        },
+        "StreamingDacPacPath": {
+            "type": "string",
+            "defaultValue": "https://openhackartifacts.blob.core.windows.net/mdw/CloudStreaming.bacpac"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
+        },
+        "SQLFictitiousCompanyNamePrefix": {
+            "type": "string",
+            "defaultValue": "VanArsdelLtd"
+        },
+        "CSVFictitiousCompanyNamePrefix": {
+            "type": "string",
+            "defaultValue": "FourthCoffee"
+        },
+        "CloudFictitiousCompanyNamePrefix": {
+            "type": "string",
+            "defaultValue": "southridge"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "name": "deployMDWOpenHackLabLinkedTemplate",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://openhackartifacts.blob.core.windows.net/mdw/DeployMDWOpenHackLab.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "SqlAdminLogin": {
+                        "value": "[parameters('SqlAdminLogin')]"
+                    },
+                    "SqlAdminLoginPassword": {
+                        "value": "[parameters('SqlAdminLoginPassword')]"
+                    },
+                    "VMAdminUsername": {
+                        "value": "[parameters('VMAdminUsername')]"
+                    },
+                    "VMAdminPassword": {
+                        "value": "[parameters('VMAdminPassword')]"
+                    },
+                    "RentalsBackupStorageAccountName": {
+                        "value": "[parameters('RentalsBackupStorageAccountName')]"
+                    },
+                    "RentalsBackupStorageContainerName": {
+                        "value": "[parameters('RentalsBackupStorageContainerName')]"
+                    },
+                    "RentalsBackupFileName": {
+                        "value": "[parameters('RentalsBackupFileName')]"
+                    },
+                    "RentalsDatabaseName": {
+                        "value": "[parameters('RentalsDatabaseName')]"
+                    },
+                    "RentalsCsvFolderName": {
+                        "value": "[parameters('RentalsCsvFolderName')]"
+                    },
+                    "CatalogJsonFileName": {
+                        "value": "[parameters('CatalogJsonFileName')]"
+                    },
+                    "SalesDacPacPath": {
+                        "value": "[parameters('SalesDacPacPath')]"
+                    },
+                    "StreamingDacPacPath": {
+                        "value": "[parameters('StreamingDacPacPath')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "SQLFictitiousCompanyNamePrefix": {
+                        "value": "[parameters('SQLFictitiousCompanyNamePrefix')]"
+                    },
+                    "CSVFictitiousCompanyNamePrefix": {
+                        "value": "[parameters('CSVFictitiousCompanyNamePrefix')]"
+                    },
+                    "CloudFictitiousCompanyNamePrefix": {
+                        "value": "[parameters('CloudFictitiousCompanyNamePrefix')]"
+                    }
+                }
+            }
+        }
+    ]
+}

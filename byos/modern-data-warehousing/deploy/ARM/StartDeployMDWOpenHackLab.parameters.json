@@ -1,0 +1,54 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "SqlAdminLogin": {
+            "value": "southridge"
+        },
+        "SqlAdminLoginPassword": {
+            "value": "md@ohPwd001!"
+        },
+        "SalesDacPacPath": {
+            "value": "https://openhackartifacts.blob.core.windows.net/mdw/CloudSales.bacpac"
+        },
+        "StreamingDacPacPath": {
+            "value": "https://openhackartifacts.blob.core.windows.net/mdw/CloudStreaming.bacpac"
+        },
+        "VMAdminUsername": {
+            "value": "southridge"
+        },
+        "VMAdminPassword": {
+            "value": "md@ohPwd001!"
+        },
+        "RentalsBackupStorageAccountName": {
+            "value": "openhackartifacts"
+        },
+        "RentalsBackupStorageContainerName": {
+            "value": "mdw"
+        },
+        "RentalsBackupFileName": {
+            "value": "onpremrentals.bak"
+        },
+        "RentalsDatabaseName": {
+            "value": "OnPremRentals"
+        },
+        "RentalsCsvFolderName": {
+            "value": "onpremrentalscsv"
+        },
+        "CatalogJsonFileName": {
+            "value": "movies_southridge.json"
+        },
+        "SQLFictitiousCompanyNamePrefix": {
+            "value": "VanArsdelLtd"
+        },
+        "CSVFictitiousCompanyNamePrefix": {
+            "value": "FourthCoffee"
+        },
+        "CloudFictitiousCompanyNamePrefix": {
+            "value": "southridge"
+        },
+        "location": {
+            "value": "eastus"
+        }
+    }
+}
