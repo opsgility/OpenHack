@@ -1,0 +1,31 @@
+POST http://localhost:7071/api/order/combineOrderContent HTTP/1.1
+content-type: application/json
+
+{
+    "orderHeaderDetailsCSVUrl":"https://serverlessohcoach.blob.core.windows.net/orders/20191110232823-OrderHeaderDetails.csv",
+    "orderLineItemsCSVUrl":"https://serverlessohcoach.blob.core.windows.net/orders/20191110232823-OrderLineItems.csv",
+    "productInformationCSVUrl": "https://serverlessohcoach.blob.core.windows.net/orders/20191110232823-ProductInformation.csv"
+}
+
+####
+
+# Invalid content
+POST http://localhost:7071/api/order/combineOrderContent HTTP/1.1
+content-type: application/json
+
+{
+    "orderHeaderDetailsCSVUrl":"https://serverlessohcoach.blob.core.windows.net/orders/20191110232823-OrderHeaderDetails.csv",
+    "orderLineItemsCSVUrl":"https://serverlessohcoach.blob.core.windows.net/orders/xx-OrderLineItems.csv",
+    "productInformationCSVUrl": "https://serverlessohcoach.blob.core.windows.net/orders/20191110232823-ProductInformation.csv"
+}
+
+####
+
+# Invalid content
+POST http://localhost:7071/api/order/combineOrderContent HTTP/1.1
+content-type: application/json
+
+{
+    "orderHeaderDetailsCSVUrl":"https://serverlessohcoach.blob.core.windows.net/orders/20191110232823-OrderHeaderDetails.csv",
+    "productInformationCSVUrl": "https://serverlessohcoach.blob.core.windows.net/orders/20191110232823-ProductInformation.csv"
+}

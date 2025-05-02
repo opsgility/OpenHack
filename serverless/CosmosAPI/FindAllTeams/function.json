@@ -1,0 +1,20 @@
+{
+    "disabled": false,
+    "bindings": [
+        {
+            "authLevel": "anonymous",
+            "type": "httpTrigger",
+            "methods": [
+                "get"
+            ],
+            "route": "team/findAll",
+            "direction": "in",
+            "name": "req"
+        },
+        {
+            "type": "http",
+            "direction": "out",
+            "name": "res"
+        }
+    ]
+}

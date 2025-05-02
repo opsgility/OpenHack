@@ -1,0 +1,16 @@
+{
+  "name": "serverless-openhack-management-api",
+  "version": "1.0.0",
+  "description": "**Deployed Azure Traffic Manager -** https://serverlessohmanagementapi.trafficmanager.net/",
+  "scripts": {
+    "start": "func host start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "azure-event-hubs": "^0.2.1",
+    "azure-storage": "^2.8.2",
+    "mongodb": "3.0.8"
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "An API used to manage batches of data sent to Storage Accounts, Event Hubs, and Ratings Functions for Serverless Open Hack Challenges.",
+    "version" : "1.0.1",
+    "title" : "Serverless OpenHack Data Generation API"
+  },
+  "host" : "serverlessohmanagementapi.trafficmanager.net",
+  "basePath" : "/api",
+  "tags" : [ {
+    "name" : "Register Storage Account",
+    "description" : "Endpoints used for OpenHack Process distributor order batch files challenge"
+  }, {
+    "name" : "Register Event Hub Namespace",
+    "description" : "Endpoints used for OpenHack Process POS sales events challenge"
+  }, {
+    "name" : "Register Create Rating Endpoint",
+    "description": "Endpoints used for OpenHack Alerting and notification challenge"
+  }],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/team/registerStorageAccount" : {
+      "post" : {
+        "tags" : [ "Register Storage Account" ],
+        "summary" : "Receive batches of files in a Storage Account",
+        "description" : "Registers a team to begin receiving batches of files in the supplied Storage Account. Warning: Updating the endpoint will overwrite existing endpoint registrations for your table.",
+        "operationId" : "register",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "registerStorageAccount",
+          "description" : "Storage Account Information",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/RegisterStorageAccount"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Invalid Parameters"
+          }
+        }
+      }
+    },
+    "/team/registerEventHub" : {
+      "post" : {
+        "tags" : [ "Register Event Hub Namespace" ],
+        "summary" : "Receive batches of events in an Event Hub",
+        "description" : "Registers a team to begin receiving batches of events in the supplied Event Hub.  Warning: Updating the endpoint will overwrite existing endpoint registrations for your table.",
+        "operationId" : "registerEventHub",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "registerEventHub",
+          "description" : "Event Hub Information",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/RegisterEventHub"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Invalid Parameters"
+          }
+        }
+      }
+    },
+    "/team/boost/{teamTableNumber}" : {
+      "post" : {
+        "tags" : [ "Register Event Hub Namespace" ],
+        "summary" : "Boost the rate that batches of events are sent to a team's registered Event Hub",
+        "description" : "Registers a team to receive batches of events sent at much higher rates to their previously registered Event Hub.",
+        "operationId" : "boostOn",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "teamTableNumber",
+          "in" : "path",
+          "description" : "ID that was used for registration",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/team/registerRatingEndpoint" : {
+      "post" : {
+        "tags" : [ "Register Create Rating Endpoint" ],
+        "summary" : "Send generated ratings to a specific /api/CreateRating endpoint",
+        "description" : "A randomly generated rating is send to the registered endpoint every six seconds.  Warning: Updating the endpoint will overwrite existing endpoint registrations for your table.",
+        "operationId" : "registerRating",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "registerRatingEndpoint",
+          "description" : "Rating Endpoint Information",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/RegisterRatingEndpoint"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Invalid Parameters"
+          }
+        }
+      }
+    },
+    "/order/combineOrderContent" : {
+      "post" : {
+        "tags" : [ "Register Storage Account" ],
+        "summary" : "Combine details from CSV file batch to build array of orders",
+        "description" : "An array of orders containing headers and details are built froma batch of CSV files.",
+        "operationId" : "combineOrderContent",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "combineOrderContent",
+          "description" : "CSV file locations",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CombineOrderContent"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Invalid Parameters"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "CombineOrderContent" : {
+      "type" : "object",
+      "required" : [ "orderHeaderDetailsCSVUrl", "orderLineItemsCSVUrl", "productInformationCSVUrl" ],
+      "properties" : {
+        "orderHeaderDetailsCSVUrl" : {
+          "type" : "string",
+          "example" : "https://soh.blob.core.windows.net/six/XXXXXXXXXXXXXX-OrderHeaderDetails.csv"
+        },
+        "orderLineItemsCSVUrl" : {
+          "type" : "string",
+          "example" : "https://soh.blob.core.windows.net/six/XXXXXXXXXXXXXX-OrderLineItems.csv"
+        },
+        "productInformationCSVUrl" : {
+          "type" : "string",
+          "example" : "https://soh.blob.core.windows.net/six/XXXXXXXXXXXXXX-ProductInformation.csv"
+        }
+      },
+      "example" : {
+        "orderHeaderDetailsCSVUrl" : "https://soh.blob.core.windows.net/six/XXXXXXXXXXXXXX-OrderHeaderDetails.csv",
+        "orderLineItemsCSVUrl" : "https://soh.blob.core.windows.net/six/XXXXXXXXXXXXXX-OrderLineItems.csv",
+        "productInformationCSVUrl" : "https://soh.blob.core.windows.net/six/XXXXXXXXXXXXXX-ProductInformation.csv"
+      }
+    },
+    "RegisterStorageAccount" : {
+      "type" : "object",
+      "required" : [ "blobContainerName", "storageAccountConnectionString", "teamTableNumber" ],
+      "properties" : {
+        "teamTableNumber" : {
+          "type" : "string",
+          "example" : "seattle-table-1"
+        },
+        "storageAccountConnectionString" : {
+          "type" : "string",
+          "example" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        },
+        "blobContainerName" : {
+          "type" : "string",
+          "example" : "orders"
+        }
+      },
+      "example" : {
+        "storageAccountConnectionString" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "teamTableNumber" : "seattle-table-1",
+        "blobContainerName" : "orders"
+      }
+    },
+    "RegisterEventHub" : {
+      "type" : "object",
+      "required" : [ "eventHubConnectionString", "eventHubName", "teamTableNumber" ],
+      "properties" : {
+        "teamTableNumber" : {
+          "type" : "string",
+          "example" : "seattle-table-1"
+        },
+        "eventHubConnectionString" : {
+          "type" : "string",
+          "example" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        },
+        "eventHubName" : {
+          "type" : "string",
+          "example" : "salesevents"
+        }
+      },
+      "example" : {
+        "teamTableNumber" : "seattle-table-1",
+        "eventHubConnectionString" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "eventHubName" : "salesevents"
+      }
+    },
+    "RegisterRatingEndpoint" : {
+      "type" : "object",
+      "required" : [ "ratingEndpoint", "teamTableNumber" ],
+      "properties" : {
+        "teamTableNumber" : {
+          "type" : "string",
+          "example" : "seattle-table-1"
+        },
+        "ratingEndpoint" : {
+          "type" : "string",
+          "example" : "{Function App Url}/api/CreateRating"
+        }
+      },
+      "example" : {
+        "teamTableNumber" : "seattle-table-1",
+        "ratingEndpoint" : "{Function App Url}/api/CreateRating"
+      }
+    }
+  }
+}

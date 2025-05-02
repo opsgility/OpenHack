@@ -1,0 +1,100 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "An API used to manage batches of data sent to Storage Accounts and Event Hubs for Serverless OpenHack challenges.",
+    "version" : "1.0.0",
+    "title" : "Serverless Open Hack Data Generation API"
+  },
+  "host" : "serverlessohmanagementapi.trafficmanager.net",
+  "basePath" : "/api",
+  "tags" : [ {
+    "name" : "Admin",
+    "description" : "Open Hack admin endpoints"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/team/submitContent" : {
+      "post" : {
+        "tags" : [ "Admin" ],
+        "summary" : "Submit a link to a team's Open Hack content",
+        "description" : "Submits a link to the team content created during the Open Hack",
+        "operationId" : "submitContent",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "contentSubmission",
+          "description" : "Submission",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/ContentSubmission"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Invalid Parameters"
+          }
+        }
+      }
+    },
+    "/team/deactivate/{teamTableNumber}" : {
+      "post" : {
+        "tags" : [ "Admin" ],
+        "summary" : "Stop a team from receiving data",
+        "description" : "Removes a team from the registry and stops them from receiving batches of data.",
+        "operationId" : "deactivate",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "teamTableNumber",
+          "in" : "path",
+          "description" : "ID that was used for registration",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/team/findAll" : {
+      "get" : {
+        "tags" : [ "Admin" ],
+        "summary" : "Find all teams",
+        "description" : "Find all teams",
+        "operationId" : "findAll",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "ContentSubmission" : {
+      "type" : "object",
+      "required" : [ "contentUrl", "teamTableNumber" ],
+      "properties" : {
+        "teamTableNumber" : {
+          "type" : "string",
+          "example" : "seattle-table-1"
+        },
+        "contentUrl" : {
+          "type" : "string",
+          "example" : "https://someUrl.com"
+        }
+      },
+      "example" : {
+        "teamTableNumber" : "seattle-table-1",
+        "contentUrl" : "https://someUrl.com"
+      }
+    }
+  }
+}
