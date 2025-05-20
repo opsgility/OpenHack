@@ -1,0 +1,74 @@
+body {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  background-color: whitesmoke; 
+  margin: 0;
+  padding: 0;
+}
+
+.App-header {
+  color: #222;
+  padding: 20px 30px 30px 30px;
+  height: 100px;
+}
+
+.App-logo {
+  height: 100%;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.App-title {
+  margin-left: 30px;
+  margin-top: 10px;
+  /* padding: 10px 0px 30px 20px; */
+  height: 100%;
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.rating-form {
+  display: inline-block;
+  width: 40%;
+  padding: 10px;
+}
+
+.rating-entry {
+  padding: 5px 0px 5px 25px;
+}
+
+.rating-entry-input {
+  margin: 10px 0px 0px 0px;
+}
+
+.rating-slider-container {
+  padding: 10px 0px 0px 10px;
+  width: 80%;
+}
+
+.submit-button {
+  margin: 5px 20px 20px 25px;
+  padding: 10px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  background-color: white;
+  color: black;
+  border: 2px solid gray;
+  border-radius: 8px;
+  font-size: .9em;
+}
+
+.json-viewer-container {
+  float:right;
+  width: 50%;
+  padding: 15px;
+  margin: 0px 50px 25px 0px; 
+}
+
+.json-viewer {
+  padding: .5em;
+  background-color: rgb(225,225,225);
+}
